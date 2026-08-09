@@ -1,0 +1,30 @@
+ARG DART_VERSION=3.10.8
+FROM dart:${DART_VERSION} AS build
+
+# Resolve app dependencies.
+WORKDIR /app
+COPY pubspec.* ./
+RUN dart pub get
+
+# Copy app source code (except anything in .dockerignore) and AOT compile app.
+COPY . .
+RUN dart build cli --target bin/server.dart -o backend_build
+RUN dart build cli --target bin/db_migrate.dart -o migrate_build
+
+# Build minimal serving image from AOT-compiled `/server`
+# and the pre-built AOT-runtime in the `/runtime/` directory of the base image.
+FROM scratch as backend
+COPY --from=build /runtime/ /
+COPY --from=build /app/backend_build/bundle/ /app/
+
+# Start server.
+EXPOSE 8080
+CMD ["/app/bin/server"]
+
+# Build db migration as separate image for k8s
+FROM scratch as migrate
+COPY --from=build /runtime/ /
+COPY --from=build /app/migrate_build/bundle/ /app/
+COPY --from=build /app/db/ /app/db/
+
+CMD ["/app/bin/db_migrate"]

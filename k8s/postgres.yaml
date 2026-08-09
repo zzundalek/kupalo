@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kupalo-postgres
+spec:
+  containers:
+    - name: postgres
+      image: localhost/kupalo-postgres:latest
+      # imagePullPolicy: Never
+      env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+      ports:
+        - containerPort: 5432
+          hostPort: 5432

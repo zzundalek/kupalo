@@ -1,0 +1,31 @@
+---
+title: MVP Kupalo
+---
+erDiagram
+    u[User] {}
+    g[Gear] {
+        string name
+        string description
+        number weight
+    }
+    gl[GearList] {
+        string name
+        string description
+    }
+    gli[GearListItem] {
+        number count
+        enum packingType
+    }
+    c[GearListCategory] {}
+    tag[Tag] {}
+    %% trip[Trip] {}
+
+    u ||--o{ g : owns
+    u ||--o{ gl : owns
+    u ||--o{ tag : owns
+
+    gl ||--o{ gli : contains
+    gl ||--o{ c : has
+    gli }o--|| g : is
+    gli o{--o| c : has
+    g }o--o{ tag : has

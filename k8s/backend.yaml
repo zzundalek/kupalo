@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kupalo-backend
+spec:
+  containers:
+    - name: backend
+      image: localhost/kupalo-backend:latest
+      # imagePullPolicy: Never
+      ports:
+        - containerPort: 8080
+          hostPort: 8080
+  # Init the DB
+  initContainers:
+    - name: migrate-db
+      image: localhost/kupalo-migrate:latest
+      env:
+        - name: POSTGRES_HOST
+          value: kupalo-postgres
+        - name: POSTGRES_DB
+          value: kupalo
+        - name: POSTGRES_SSL
+          value: false
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER

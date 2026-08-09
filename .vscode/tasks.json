@@ -1,0 +1,56 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Podman: build local dev images",
+      "detail": "Builds all local development OCI images",
+      "type": "shell",
+      "command": "./scripts/build_images.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Podman: start local dev pods",
+      "detail": "Starts all local development pods",
+      "type": "shell",
+      "command": "./scripts/start_pods.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Podman: stop local dev pods",
+      "detail": "Stops all local development pods",
+      "type": "shell",
+      "command": "./scripts/stop_pods.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Podman: rebuild and restart local dev pods",
+      "detail": "Rebuilds and re-run all local development pods",
+      "type": "shell",
+      "problemMatcher": [],
+      "dependsOn": [
+        "Podman: stop local dev pods",
+        "Podman: build local dev images",
+        "Podman: start local dev pods",
+      ],
+      "dependsOrder": "sequence",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+  ]
+}

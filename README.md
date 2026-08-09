@@ -1,5 +1,6 @@
 # Kupalo
 
+[![schema validation: zodart](https://img.shields.io/badge/schema_validation-ZodArt-green)](https://pub.dev/packages/zodart)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
 Your gear. Your lists. Anywhere. Anytime.
@@ -7,7 +8,12 @@ Your gear. Your lists. Anywhere. Anytime.
 ## Requirements
 
 - [Podman](https://podman.io)
-- For other VS Code extensions see [Formaters section](#Formatters)
+
+## VS code extensions
+
+- [ZodArt Snippets](https://marketplace.visualstudio.com/items?itemName=mergepanic.zodart-snippets)
+
+For other used VS Code extensions see [Formaters section](#Formatters)
 
 ## Local development
 

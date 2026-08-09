@@ -1,0 +1,11 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+linter:
+  rules:
+    sort_pub_dependencies: false
+    always_use_package_imports: false
+    prefer_relative_imports: true
+    lines_longer_than_80_chars: false
+formatter:
+  page_width: 120
+  trailing_commas: preserve # Make pana respect settings form very_good_analysis https://github.com/dart-lang/pana/issues/1459

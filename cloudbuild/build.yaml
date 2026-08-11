@@ -1,0 +1,39 @@
+steps:
+  # Build the image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest"
+      - "--target"
+      - "backend"
+      - "-f"
+      - "backend/Containerfile"
+      - "backend/."
+  # Deploy the image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest"
+
+  # Deploy image to Cloud Run
+  # TODO use when run through the trigger $COMMIT_SHA
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "${_SERVICE_NAME}"
+      - "--image"
+      - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest"
+      - "--region"
+      - "${_REGION}"
+
+substitutions:
+  _REGION: "asia-northeast1"
+  _REPOSITORY: "oci-image-dev"
+  _IMAGE_NAME: "kupalo-backend"
+  _SERVICE_NAME: "cloudrundevtest"
+
+images:
+  - "${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPOSITORY}/${_IMAGE_NAME}:latest"

@@ -52,5 +52,16 @@
         "panel": "new"
       }
     },
+    {
+      "label": "CloudBuild: DEV - build and deploy",
+      "detail": "Builds and deploys to the GCP dev",
+      "type": "shell",
+      "command": "gcloud builds submit . --config=cloudbuild/build.yaml",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
   ]
 }

@@ -8,6 +8,7 @@ Your gear. Your lists. Anywhere. Anytime.
 ## Requirements
 
 - [Podman](https://podman.io)
+- [Google Cloud CLI](https://cloud.google.com/cli)
 
 ## VS code extensions
 

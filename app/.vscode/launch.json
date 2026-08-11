@@ -7,6 +7,13 @@
       "type": "dart",
       "program": "lib/main.dart",
       "flutterMode": "debug"
-    }
+    },
+    {
+      "name": "DB - seed",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/db/seeds/seed.dart",
+      "flutterMode": "debug",
+    },
   ]
 }

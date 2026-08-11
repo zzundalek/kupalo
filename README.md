@@ -22,6 +22,15 @@ Kupalo uses [VS Code tasks](https://code.visualstudio.com/docs/debugtest/tasks#_
 
 To start developing execute the `Podman: rebuild and restart local dev pods` task.
 
+### Terraform
+
+To use Terraform locally use `application-default` to obtain / revoke the user credentials.
+
+```sh
+gcloud auth application-default login
+gcloud auth application-default revoke
+```
+
 ## Formaters
 
 - markdown

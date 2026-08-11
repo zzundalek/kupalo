@@ -23,7 +23,9 @@
   },
   "[sql]": {
     "editor.defaultFormatter": "adpyke.vscode-sql-formatter",
-    
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
   },
   "search.exclude": {
     "doc/": true,

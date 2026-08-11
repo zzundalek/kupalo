@@ -1,4 +1,5 @@
 .git/
+terraform/
 .DS_STORE
 .DS_Store
 backend/.dart_tool/

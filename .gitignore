@@ -6,3 +6,6 @@ terraform.tfstate.backup
 .terraform.tfstate.lock.info
 .DS_STORE
 .DS_Store
+
+# FVM Version Cache
+.fvm/

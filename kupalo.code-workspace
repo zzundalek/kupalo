@@ -1,0 +1,118 @@
+{
+  "folders": [
+    {
+      "name": "kupalo_root",
+      "path": "."
+    },
+    {
+      "name": "App",
+      "path": "./app"
+    },
+    {
+      "name": "Backend",
+      "path": "./backend"
+    },
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "sql-formatter.uppercase": true,
+    "editor.codeActionsOnSave": {
+      "quickfix.insertSemicolon": "explicit"
+    },
+    "dart.lineLength": 120,
+    "[dart]": {
+      "editor.rulers": [
+        120
+      ]
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[shellscript]": {
+      "editor.defaultFormatter": "mkhl.shfmt"
+    },
+    "[sql]": {
+      "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+    },
+    "[terraform]": {
+      "editor.defaultFormatter": "hashicorp.terraform"
+    },
+    "search.exclude": {
+      "doc/": true
+    },
+  },
+  "tasks": {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Podman: build local dev images",
+        "detail": "Builds all local development OCI images",
+        "type": "shell",
+        "command": "./scripts/build_images.sh",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Podman: start local dev pods",
+        "detail": "Starts all local development pods",
+        "type": "shell",
+        "command": "./scripts/start_pods.sh",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Podman: stop local dev pods",
+        "detail": "Stops all local development pods",
+        "type": "shell",
+        "command": "./scripts/stop_pods.sh",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Podman: rebuild and restart local dev pods",
+        "detail": "Rebuilds and re-run all local development pods",
+        "type": "shell",
+        "problemMatcher": [],
+        "dependsOn": [
+          "Podman: stop local dev pods",
+          "Podman: build local dev images",
+          "Podman: start local dev pods",
+        ],
+        "dependsOrder": "sequence",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+      {
+        "label": "CloudBuild: DEV - build and deploy",
+        "detail": "Builds and deploys to the GCP dev",
+        "type": "shell",
+        "command": "gcloud builds submit . --config=cloudbuild/build.yaml",
+        "problemMatcher": [],
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        }
+      },
+    ]
+  }
+}
